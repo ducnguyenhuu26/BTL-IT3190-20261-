@@ -140,6 +140,32 @@ Validation writes model, code, data, and prediction hashes to `results/usgs_abla
 
 The completed run selected LightGBM + USGS on validation (RMSLE 0.455867 vs 0.464533 for LightGBM), but its test RMSLE was higher (0.439166 vs 0.437766). Adding IDs also did not improve RMSLE in this budget. Both convex blends selected beta=1 and matched their USGS parent exactly. This is a negative exploratory finding for the added data, not evidence of an accuracy gain. The report builder independently recomputes saved test metrics and paired intervals and links these findings into the BTL draft.
 
+## Mathematical residual calibration (new exploratory method)
+
+`src/hierarchical_residual.py` implements a strictly convex Gaussian
+partial-pooling correction for store, family, and store-family residual bias.
+An auxiliary LightGBM trained on 2013–2014 supplies out-of-sample residuals
+for 2015. Ridge penalties are selected on Jan–Feb 2016; March is reported
+without affecting the selection rule. The fixed original LightGBM provides
+the base validation and test forecasts. The one-time test stage reads saved
+base predictions and refuses repetition after writing its marker.
+
+```powershell
+.\.venv\Scripts\python.exe -m scripts.run_hierarchical_residual --stage develop
+.\.venv\Scripts\python.exe -m scripts.run_hierarchical_residual --stage test
+.\.venv\Scripts\python.exe -m scripts.run_online_gate_development
+.\.venv\Scripts\python.exe -m scripts.report_hierarchical_residual
+```
+
+The completed test is **exploratory** because earlier project stages already
+inspected the Favorita test period. The correction reduced test RMSLE from
+0.437766 to 0.437142, while MAE increased from 77.816 to 77.844. Its exact
+quadratic solution, conditional Bayes argument, algebraic risk decomposition,
+ablation, and limits are in [the mathematical method report](reports/MATHEMATICAL_METHOD.md).
+The online OGD/ridge gates are retained as validation-only negative branches.
+These methods use supervised feedback; reinforcement learning would add a
+decision process that this one-step forecasting task does not contain.
+
 ## Implementation optimization and historical reproducibility
 
 Feature construction fills positional arrays instead of repeatedly assigning

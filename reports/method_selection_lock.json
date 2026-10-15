@@ -1,0 +1,25 @@
+{
+  "locked_at_utc": "2026-10-15T17:16:41.564605+00:00",
+  "selection_rule": "minimum Jan-Feb 2016 RMSLE; candidate index breaks ties; March is confirmation only",
+  "selected_candidate": 12,
+  "selected_penalties": {
+    "global_": 1000.0,
+    "store": 100.0,
+    "family": 1000000000.0,
+    "pair": 300.0
+  },
+  "base_jan_feb_rmsle": 0.48465040935931464,
+  "selected_jan_feb_rmsle": 0.48425427454929854,
+  "base_march_rmsle": 0.4228867213791278,
+  "selected_march_rmsle": 0.42249179106449225,
+  "fit_rows": 1297296,
+  "calibration_rows": 648648,
+  "source_sha256": "99a1b7f4241821df10fa71f23abdd71c634f71f901e3cab1400c0f0c583f862c",
+  "base_model_sha256": "9c3a82949a0d05aab558339d5a8b29caf2a19f09fa14c93cfa4ce7bef04bc2b6",
+  "calibration_model_sha256": "962e2013848d3face9cc5012989ec73ad246cc5b8f3653eef44a086e07972acd",
+  "summary_sha256": "9cdebc6a5acbb8e397b7fd9155e1efb83d870e45247f310224b2ea16b005c900",
+  "validation_predictions_sha256": "6a7f49765c0a76178228974018a6c246b04b51e38a23f570623cb0223bde98c5",
+  "method_source_sha256": "91812d98de5b68414d7160a1a610231ea565813128aa4c7576730324a3317024",
+  "script_source_sha256": "068f6e2139ced9700a7f11bb2430f2decff85572b487aa76e1a06cec1ba6fc13",
+  "scope": "Exploratory: prior project stages inspected Favorita test dates"
+}

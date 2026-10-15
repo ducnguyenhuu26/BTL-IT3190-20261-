@@ -1,0 +1,2 @@
+delta_rmsle,ci_low,ci_high,block_days,blocks,bootstrap_reps
+-0.000624070115071873,-0.0007503825041854387,-0.0005044379820480894,28,18,500

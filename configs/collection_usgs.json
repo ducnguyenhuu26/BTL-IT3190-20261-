@@ -1,0 +1,15 @@
+{
+  "source": "USGS FDSN Earthquake Catalog",
+  "endpoint": "https://earthquake.usgs.gov/fdsnws/event/1/query",
+  "documentation": "https://earthquake.usgs.gov/fdsnws/event/1/",
+  "start_date": "2013-01-01",
+  "end_date": "2017-08-15",
+  "lookback_days": 7,
+  "min_magnitude": 4.5,
+  "strong_magnitude": 6.0,
+  "bbox": {"minlatitude": -5.1, "maxlatitude": 1.6, "minlongitude": -81.2, "maxlongitude": -75.1},
+  "timezone": "Mainland Ecuador UTC-05:00; Galapagos excluded",
+  "timeout_seconds": 45,
+  "request_interval_seconds": 1.0,
+  "attempts": 3
+}

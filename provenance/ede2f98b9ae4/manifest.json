@@ -1,0 +1,19 @@
+{
+  "lock_sha256": "ede2f98b9ae4cb3f3e928e81b7935a78763d8f8ebdd761562a52bd9e88bcb2b5",
+  "code_hashes": {
+    "scripts/run_usgs_ablation.py": "590cf06c37947998b2c630cb9a42af8bfd2e970fbdf12ce48507311b4c182c7b",
+    "scripts/run_full_favorita.py": "f825f30d3fa5931667605c6add43089e715fe56dc00f73424408eb3b2d71ce8d",
+    "scripts/collect_external_data.py": "d0de84546e815cf1d559bd7d2c69f694d0b1b5bf88d86e2cfb6572f348a9dc9d",
+    "src/data.py": "f6cb5ac38197eb8f0a515eaf0df1a62cd38ac779e439eb978195fadaa30a9e2f",
+    "src/features.py": "dd6e3b9b5dd4bbc4373f9d50dc4c482e065a362c9f2cd50f536bd8a4bc6ff870",
+    "src/external_data.py": "8652498ec1662fbdec6df11781afc86cbe2c4ed61028828bb05063b5d75b92d0",
+    "configs/usgs_ablation.json": "06037014b76408d5b3a7845281d127fc75ffc17f56c676400d3aa8ffa4addb1f"
+  },
+  "reference_hashes": {
+    "src/evaluate.py": "a267a79064e39494b7542fc5f76f5e778759ca44d9e2581edb0b232f1314419d",
+    "src/baselines.py": "fae9f8aa20196482d0de48bac849cf024a78b3a0939f94082ad3a0d29b9da94c",
+    "src/jump_filter.py": "050183e855250b7447122f17f723ca789d000d58b79ebd03c5b85ec272251a7f",
+    "src/robust_jump_filter.py": "9c91cde551cfc794e6ebd50a88507422be1c2cf76cc2cd4f48c1f976707c09a1"
+  },
+  "purpose": "Original bytes for historical report audits and optimization regression benchmarks"
+}

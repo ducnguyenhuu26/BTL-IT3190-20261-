@@ -1,0 +1,8 @@
+{
+  "seed": 42,
+  "num_threads": 4,
+  "train_end": "2015-12-31",
+  "validation_end": "2016-03-31",
+  "max_series": null,
+  "model": {"n_estimators": 500, "learning_rate": 0.05, "num_leaves": 63}
+}

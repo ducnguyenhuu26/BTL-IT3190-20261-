@@ -4,7 +4,7 @@ CPU-first, one-step-ahead daily sales forecasting for each `(store_nbr, family)`
 
 ## Current implementation status
 
-The repository contains the data and feature pipeline, chronological splitting, LightGBM trainer, seasonal-naive/EMA/Kalman/jump-filter evaluation, synthetic experiment, EDA scripts, and unit tests. This Windows workspace has a local `.venv` with LightGBM 4.7.0 and the public-mirror `train.csv` in the Git-ignored `data/raw/` folder. A 100-series real-data smoke run and full-data EDA have been completed; measured scope and outputs are recorded below. Synthetic results remain separate from real-data results.
+The repository contains data collection, causal preprocessing, chronological splitting, LightGBM training, residual filtering, synthetic experiments, EDA, and tests. Completed experiments cover all 1,782 Favorita series, all 12 Beijing stations, and a full USGS feature ablation. The USGS validation gain did not generalize to test; measured results and limitations are recorded below. Raw data, models and large predictions stay local in Git-ignored directories.
 
 ## Data and setup
 
@@ -16,15 +16,15 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-The default split is train through `2015-12-31`, validation `2016-01-01`–`2016-03-31`, and test from `2016-04-01` through the last labeled date. The loader checks the actual date coverage and rejects empty splits. It does not use Kaggle's unlabeled `test.csv`.
+The default split is train through `2015-12-31`, validation `2016-01-01`–`2016-03-31`, and test from `2016-04-01` through the last labeled date. The loader checks the actual date coverage and rejects empty splits. It does not use Kaggle's unlabeled `test.csv`. `requirements-lock.txt` records the tested Python 3.11 environment; use `pip install -r requirements-lock.txt` for the same package versions. Tests work without downloaded datasets; the real Beijing coverage integration check is skipped when that dataset is absent.
 
 ## Run
 
 ```powershell
-\.venv\Scripts\python.exe scripts/prepare_data.py
-\.venv\Scripts\python.exe scripts/run_eda.py
-\.venv\Scripts\python.exe scripts/run_experiments.py --seed 42
-\.venv\Scripts\python.exe scripts/run_baselines.py --max-series 100 --seed 42
+.\.venv\Scripts\python.exe -m scripts.prepare_data
+.\.venv\Scripts\python.exe -m scripts.run_eda
+.\.venv\Scripts\python.exe -m scripts.run_experiments --seed 42
+.\.venv\Scripts\python.exe -m scripts.run_baselines --max-series 100 --seed 42
 ```
 
 Omit `--max-series` for all available series. The subset is chosen deterministically from train series and carried across all splits. `configs/default.json` controls dates, seed, thread count, and the fixed LightGBM parameters. Generated artifacts go under `results/` and are ignored by Git.
@@ -139,5 +139,34 @@ The catalog is retrospective and revised: origin timestamps and last-update time
 Validation writes model, code, data, and prediction hashes to `results/usgs_ablation_exploratory/selected_configs.json`. Test verifies the lock and writes a start marker to prevent repeated model evaluation. `--stage report` only audits and summarizes saved predictions. The collection remains retrospective, with historical first-publication times unverified; the Favorita test period was inspected in earlier tasks. Start with `reports/USGS_MODEL_ABLATION.md` for measured results, validation selection, ensemble weights, uncertainty, and provenance. Earlier Task 01–05 model artifacts are preserved.
 
 The completed run selected LightGBM + USGS on validation (RMSLE 0.455867 vs 0.464533 for LightGBM), but its test RMSLE was higher (0.439166 vs 0.437766). Adding IDs also did not improve RMSLE in this budget. Both convex blends selected beta=1 and matched their USGS parent exactly. This is a negative exploratory finding for the added data, not evidence of an accuracy gain. The report builder independently recomputes saved test metrics and paired intervals and links these findings into the BTL draft.
-#   B T L - I T 3 1 9 0 - 2 0 2 6 1 -  
- 
+
+## Implementation optimization and historical reproducibility
+
+Feature construction fills positional arrays instead of repeatedly assigning
+DataFrame slices per series. Online backtests forecast and update whole date
+batches using the existing vectorized filters; scalar adapters remain supported.
+Metric aggregation computes log error once and uses compact group codes. See
+[measured timing and regression checks](reports/OPTIMIZATION.md).
+
+The original USGS code is byte-preserved under
+[`provenance/ede2f98b9ae4/`](provenance/README.md). Report-only audits may verify
+that historical snapshot when current code has been optimized. Prediction/test
+still enforce current-code hashes and the existing test-start marker. New
+experiments require a separate output directory and a fresh validation lock.
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+.\.venv\Scripts\python.exe -m scripts.benchmark_optimizations
+.\.venv\Scripts\python.exe -m scripts.build_report
+```
+
+The benchmark needs local Favorita data and saved USGS validation predictions;
+it compares implementations without retraining models or evaluating a new test.
+Reports and small figures are versioned; links to raw data/model/prediction
+artifacts refer to local files that are intentionally excluded from Git.
+
+Known modeling limitation for later discussion: Beijing's current missing-target
+path skips measurement updates but does not commit every predict-only time
+transition. Historical scores describe that implementation. A corrected gap-aware
+filter needs a separately versioned evaluation; the performance-only optimization
+does not change this behavior or revise those scores.

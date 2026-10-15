@@ -1,0 +1,13 @@
+{
+  "seed": 42,
+  "num_threads": 4,
+  "train_end": "2015-12-31",
+  "validation_end": "2016-03-31",
+  "snapshot": "data/raw/external/usgs_ecuador/2026-10-14",
+  "output": "results/usgs_ablation_exploratory",
+  "model": {"n_estimators": 500, "learning_rate": 0.05, "num_leaves": 63},
+  "early_stopping_rounds": 50,
+  "bootstrap": {"block_days": 28, "repetitions": 500},
+  "selection_metric": "validation RMSLE; fixed candidate order breaks ties",
+  "scope": "Full 1782-series retrospective exploratory ablation; historical publication of USGS revisions unverified"
+}

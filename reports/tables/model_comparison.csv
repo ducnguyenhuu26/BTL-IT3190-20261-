@@ -1,0 +1,15 @@
+dataset,scope,model,n_valid,rmsle,rmse_pm25,mae,rmse_log,source
+Favorita,100 series; exploratory test,seasonal_naive,50100,0.5669822697998064,,110.7948959897525,0.5669822697998064,results/baselines/metrics.csv
+Favorita,100 series; exploratory test,lgbm_ema,50100,0.4304041786712821,,97.63514953924184,0.4304041786712821,results/baselines/metrics.csv
+Favorita,100 series; exploratory test,LightGBM,50100,0.4198700455881702,,102.04008974185344,0.4198700455881702,results/model_review/real_test_comparison.csv
+Favorita,100 series; exploratory test,Kalman,50100,0.4202811586922297,,102.36786464860324,0.4202811586922297,results/model_review/real_test_comparison.csv
+Favorita,100 series; exploratory test,Jump Filter,50100,0.4214048178423142,,102.27452800540344,0.4214048178423142,results/model_review/real_test_comparison.csv
+Favorita,100 series; exploratory test,Robust Kalman,50100,0.4202672068038175,,101.37252179724918,0.4202672068038175,results/model_review/real_test_comparison.csv
+Favorita,100 series; exploratory test,Robust Jump Filter,50100,0.4202724163848574,,101.37217486227378,0.4202724163848574,results/model_review/real_test_comparison.csv
+Beijing,12 stations; locked one-time test,Seasonal naive,68536,,93.78175684849776,61.68839733862496,1.2973934927608208,results/external_validation/test_metrics.csv
+Beijing,12 stations; locked one-time test,LightGBM,68536,,20.42065263689373,10.261984145017111,0.2933182998051061,results/external_validation/test_metrics.csv
+Beijing,12 stations; locked one-time test,LightGBM + EMA,68536,,20.417247139234203,10.260557133550448,0.2927734034805421,results/external_validation/test_metrics.csv
+Beijing,12 stations; locked one-time test,LightGBM + Kalman,68536,,19.89883261022978,10.045092862276984,0.2930458699738181,results/external_validation/test_metrics.csv
+Beijing,12 stations; locked one-time test,LightGBM + Robust Kalman,68536,,19.89063453366467,10.040485207191098,0.2924830022806699,results/external_validation/test_metrics.csv
+Beijing,12 stations; locked one-time test,LightGBM + Jump Filter,68536,,19.89883261022978,10.045092862276984,0.2930458699738181,results/external_validation/test_metrics.csv
+Beijing,12 stations; locked one-time test,LightGBM + Robust Jump Filter,68536,,19.89063453366467,10.040485207191098,0.2924830022806699,results/external_validation/test_metrics.csv

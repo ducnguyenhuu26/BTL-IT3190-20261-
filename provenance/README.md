@@ -18,3 +18,9 @@ implementation, use a new output directory and a new validation lock.
 
 Git attributes disable newline conversion for this directory to preserve the
 archived byte checksums on both Windows and Linux.
+
+`tlc_green_manifest.json` records the immutable monthly raw-file snapshot used
+for the locked Green Taxi study. `tlc_green_crawl_manifest.json` records the
+separate HTML catalog crawl, including links found on the page and archive
+template fallbacks. The underlying Parquet files and SQLite warehouse remain
+local and Git-ignored.

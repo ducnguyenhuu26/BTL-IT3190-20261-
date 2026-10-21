@@ -1,0 +1,10 @@
+{
+  "dataset": "NYC TLC Green Taxi Trip Records",
+  "first_month": "2023-01",
+  "last_month": "2025-12",
+  "top_zones": 12,
+  "valid_zone_min": 1,
+  "valid_zone_max": 263,
+  "source_page": "https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page",
+  "source_template": "https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_{month}.parquet"
+}

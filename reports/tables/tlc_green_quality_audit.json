@@ -1,0 +1,23 @@
+{
+  "months": 36,
+  "raw_rows": 2038653,
+  "kept_rows": 2032098,
+  "zero_zone_days": 1,
+  "top_zones_selected_from_2023": [
+    74,
+    75,
+    41,
+    166,
+    95,
+    82,
+    43,
+    97,
+    42,
+    65,
+    244,
+    7
+  ],
+  "panel_rows": 13152,
+  "manifest_sha256": "65fd512a4c034ffa21fb9090413b81757de5e38f1d9c1240dd22caecd112f328",
+  "panel_sha256": "e17e38f8f3431fbba118f86674178402d7b534412871a72018228ebae2bf8f1c"
+}
